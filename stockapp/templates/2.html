@@ -1,0 +1,285 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <title>الترهوني للسيراميك</title>
+    <style>
+        .table { 
+            width: 800px;
+            height: 40px;
+            font-weight: bold;
+            direction: rtl;
+            /* font-family: 'Tajawal', sans-serif; */
+        }
+
+                
+        th {
+            background-color: #EEE;
+            
+        }
+
+                
+        tbody td{
+            height: 40px;
+        }
+
+        @media print {
+            .noprint {
+                visibility: hidden;
+            }
+        }
+       
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'img/3.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+          الترهوني
+        </a>
+        <a class="navbar-brand" aria-current="page" href="http://127.0.0.1:8000/admin">لوحة التحكم</a>
+        <a class="navbar-brand" aria-current="page" href="http://127.0.0.1:8000/all">الاصناف التي تحتاج لشراء كمية منها</a>
+      </nav>
+</head>
+<body>
+    
+    <!-- Image and text -->
+    
+<div style="text-align: right;" class="container">
+    <h2 style="text-align: center;" class="mt-3">فاتورة مبيعات</h2>
+    <div class="row mt-5">
+    <h6 class="border bg-light p-2">رقم الفاتورة: </h6>
+    <h6 class="border p-2">{{karton.id}}</h6>
+    <h6 class="mr-5 border bg-light p-2">التاريخ: </h6>
+    <h6 class="border p-2">{{karton.date_time|date:'j/n/Y'}}</h6>
+    <h6 class="mr-5 border bg-light p-2">اسم العميل</h6>
+    <h6 class="border p-2">{{karton}}</h6>
+    
+    </div>
+    <div class="row mb-3 mt-2">
+    <h6 class="border bg-light p-2">ملاحظات</h6>
+    <h6 class="border p-2">تم صرف الفتورة من قبل م/عاطف عبدالغفار</h6>
+    </div>
+    <table border="2" align="center" style="width: 1000px;">
+        <caption></caption>
+        <tr align="center" style="height: 40px;">
+            <th>اسم الصنف</th>
+            <th>كرتونة</th>
+            <th>البلاط الزائد</th>
+            <th>بلاطه</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الاجمالي</th>
+        </tr>
+        <tbody>
+        <tr align="center">
+            {% load l10n %}
+            <td>{{karton.prodects}}</td>
+            <td id="">{{karton.get_karton|floatformat:2}}</td>
+            <td id="getnumber"></td> <!--{{karton.get_Number_of_ceramics_excess|floatformat:2}} -->
+            <td id="balata">{{karton.get_balata|floatformat:2}}</td>
+            <td id="numbers">{{karton.count}}</td>
+            <td class='money'>{{karton.get_price_mets}}</td>
+            <td class="sums">{{karton.get_price|floatformat:2}}</td>
+        </tr>
+
+        <tr align="center">
+            <td>{{karton.prodects_2}}</td>
+            <td id="">{{karton.get_karton2|floatformat:2}}</td>
+            <td id="getnumber2"></td>
+            <td id="balata2">{{karton.get_balata2|floatformat:2}}</td>
+            <td id="numbers2">{{karton.count_2}}</td>
+            <td class="money2">{{karton.get_price_mets2|floatformat:2}}</td>
+            <td class="sums">{{karton.get_price2|floatformat:2}}</td>
+        </tr>
+        {% if karton.prodects3 != None %}
+        <tr align="center">
+            <td>{{karton.prodects3}}</td>
+            <td id="">{{karton.get_karton3|floatformat:2}}</td>
+            <td id="getnumber3">{{karton.get_Number_of_ceramics_excess3|floatformat:2}}</td>
+            <td id="balata3">{{karton.get_balata3|floatformat:2}}</td>
+            <td id="numbers3">{{karton.count_3|floatformat:2}}</td>
+            <td class='money3'>{{karton.get_price_mets3|floatformat:2}}</td>
+            <td class="sums">{{karton.get_price3|floatformat:2}}</td>
+        </tr>
+        {% endif %}
+        
+        {% if karton.prodects_4 != None %}
+        <tr align="center">
+            <td>{{karton.prodects_4}}</td>
+            <td id="karton4">{{karton.get_karton4|floatformat:2}}</td>
+            <td id="getnumber4">{{karton.get_Number_of_ceramics_excess4|floatformat:2}}</td>
+            <td id="balata4">{{karton.get_balata4|floatformat:2}}</td>
+            <td id="numbers4">{{karton.count_4|floatformat:2}}</td>
+            <td class="money4">{{karton.get_price_mets4|floatformat:2}}</td>
+            <td class="sums">{{karton.get_price4|floatformat:2}}</td>
+        </tr>
+        {% endif %}
+        
+            {% if karton.prodect_5 != None %}
+            <tr align="center">
+                <td>{{karton.prodect_5}}</td>
+                <td id="">{{karton.get_karton5|floatformat:2}}</td>
+                <td id="getnumber5">{{karton.get_Number_of_ceramics_excess5|floatformat:2}}</td>
+                <td id="balata5">{{karton.get_balata5|floatformat:2}}</td>
+                <td id="numbers5">{{karton.count_5|floatformat:2}}</td>
+                <td class="money5">{{karton.get_price_mets5|floatformat:2}}</td>
+                <td class="sums">{{karton.get_price5|floatformat:2}}</td>
+            </tr>
+            {% endif %}
+        
+        {% if karton.prodects_6  != None %}
+        <tr align="center">
+            <td>{{karton.prodects_6}}</td>
+            <td id="">{{karton.get_karton6|floatformat:2}}</td>
+            <td id="getnumber6">{{karton.get_Number_of_ceramics_excess6|floatformat:2}}</td>
+            <td id="balata6">{{karton.get_balata6|floatformat:2}}</td>
+            <td id="numbers6">{{karton.count_6}}</td>
+            <td class="">{{karton.get_price_mets6|floatformat:2}}</td>
+            <td class="sums">{{karton.get_price6|floatformat:2}}</td>
+        </tr>
+
+        {% endif %}
+       
+      
+
+    </tbody>
+</table>
+<div class="vfr"></div>
+
+<div class="row">
+
+<div class="row mb-3 mt-2">
+    <h6 class="border bg-light p-2 pr-5 pl-5">الصافي</h6>
+    <h6 class="border p-2 pr-5 pl-5" id="rea"></h6>
+    
+</div>
+</div>
+<div class="row">
+
+<div class="row mb-3 mt-2">
+    <h6 class="border bg-light p-2 pr-5 pl-5">الاجمالي</h6>
+    <h6 class="border p-2 pr-5 pl-5" id="ree"></h6>
+    
+</div>
+
+</div>
+<p class="mr-5 pr-5 row">الفرز الثالث والبروسلين والجوهرة و gpm  ليس له مرتجع</p>
+    <p class="mr-5 pr-5">المرتجع من الفرز الاول والثاني فقط في خلال شهر من تاريخ الصرف وكراتين كاملة</p>
+    <p  class="mr-5 pr-5">الشركة لا تقبل الكسر بعد استلام العميل مكان التسليم</p>
+<button style="margin-right: 450px;" onclick="myfun()" class="mb-5 btn btn-primary noprint">اطبع الفاتورة</button>
+<script>
+    function myfun() {
+        window.print()
+    };
+    $(document).ready(function(){
+        var total = 0;
+        $(".sums").each(function(){
+            var salary = $(this).text();
+            total += parseInt(salary)
+        });
+        let yyts = '{{karton.get_brice}}';
+        let yytss = parseFloat(yyts);
+        $("#rrttee").text(yyts);
+
+        var no = parseInt($("#balata3").text());
+        var balatss3 = parseInt($("#numbers3").text());
+        var getss3 = no / balatss3;
+        $("#getnumber3").text(getss3);
+
+        var balat = $("#balata").text();
+        var bala = parseInt(balat);
+        var balay = bala * 1;
+        var balatss = $("#numbers").text();
+        var balae = parseInt(balatss);
+        var getss = bala / balae;
+        $("#getnumber").text(getss);
+
+        var balat3 = $("#balata2").text();
+        var bala3 = parseInt(balat3);
+        var balay3 = bala3 * 1;
+
+        var balatss2 = $("#numbers2").text();
+        var balae2 = parseInt(balatss2);
+        var getss2 = bala3 / balae2;
+        var ssdd = getss2 * 1
+        $("#getnumber2").text(ssdd);
+        
+
+        var no4 = parseInt($("#balata4").text());
+        var balatss4 = parseInt($("#numbers4").text());
+        var getss4 = no4 / balatss4;
+        $("#getnumber4").text(getss4);
+
+        var no5 = parseInt($("#balata5").text());
+        var balatss5 = parseInt($("#numbers5").text());
+        var getss5 = no5 / balatss5;
+        $("#getnumber5").text(getss5);
+
+        var no6 = parseInt($("#balata6").text());
+        var balatss6 = parseInt($("#numbers6").text());
+        var getss6 = no6 / balatss6;
+        $("#getnumber6").text(getss6);
+
+
+        $("#ree").text(total)
+        $("#rea").text(total)
+        var mon = $(".money").text();
+        var monn = parseInt(mon);
+        var mony = monn * 1;
+        $(".money").text(mony);
+        
+        var mon3 = $(".money3").text();
+        var monn3 = parseInt(mon3);
+        var mony3 = monn3 * 1;
+        $(".money3").text(mony3);
+        var mon4 = $(".money4").text();
+        var monn4 = parseInt(mon4);
+        var mony4 = monn4 * 1;
+       
+        var mon6 = $(".money6").text();
+        var monn6 = parseInt(mon6);
+        var mony6 = monn6 * 1;
+        $(".money6").text(mony6);
+        
+        var karto2 = $("#karton2").text();
+        var kart2 = parseInt(karto2);
+        var kartoo2 = kart2 * 1;
+        $("#karton2").text(kartoo2);        
+        var karto3 = $("#karton3").text();
+        var kart3 = parseInt(karto3);
+        var kartoo3 = kart3 * 1;
+        $("#karton3").text(kartoo3);
+        
+        var karto5 = $("#karton5").text();
+        var kart5 = parseInt(karto5);
+        var kartoo5 = kart5 * 1;
+        $("#karton5").text(kartoo5);
+        var karto6 = $("#karton6").text();
+        var kart6 = parseInt(karto6);
+        var kartoo6 = kart6 * 1;
+        $("#karton6").text(kartoo6);
+       
+
+        
+        $("#balata4").text(balay4);
+        var balat5 = $("#balata5").text();
+        var bala5 = parseInt(balat5);
+        var balay5 = bala5 * 1;
+        $("#balata5").text(balay5);
+        var balat6 = $("#balata6").text();
+        var bala6 = parseInt(balat6);
+        var balay6 = bala6 * 1;
+        $("#balata6").text(balay6);
+
+        
+    });
+</script>
+</body>
+</html>

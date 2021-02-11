@@ -1,0 +1,56 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <title>الترهوني للسيراميك</title>
+    <style>
+        .table { 
+            width: 800px;
+            height: 40px;
+            font-weight: bold;
+            direction: rtl;
+            /* font-family: 'Tajawal', sans-serif; */
+        }
+
+                
+        th {
+            background-color: #EEE;
+            
+        }
+
+                
+        tbody td{
+            height: 40px;
+        }
+
+       
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'img/3.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+          الترهوني
+        </a>
+        <a class="navbar-brand" aria-current="page" href="http://127.0.0.1:8000/admin">لوحة التحكم</a>
+        <a class="navbar-brand" aria-current="page" href="http://127.0.0.1:8000/all">الاصناف التي تحتاج لشرائ كمية منها</a>
+      </nav>
+</head>
+<body>
+    
+    <!-- Image and text -->
+    
+
+    <form method="post">
+        {{karton.as_p}}
+        <button>save</button>
+    </form>
+   
+</body>
+</html>
