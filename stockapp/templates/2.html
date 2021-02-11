@@ -88,7 +88,7 @@
             <td class='money'>{{karton.get_price_mets}}</td>
             <td class="sums">{{karton.get_price|floatformat:2}}</td>
         </tr>
-
+        {% if karton.prodects2 != None %}
         <tr align="center">
             <td>{{karton.prodects_2}}</td>
             <td id="">{{karton.get_karton2|floatformat:2}}</td>
@@ -98,6 +98,7 @@
             <td class="money2">{{karton.get_price_mets2|floatformat:2}}</td>
             <td class="sums">{{karton.get_price2|floatformat:2}}</td>
         </tr>
+        {% endif %}
         {% if karton.prodects3 != None %}
         <tr align="center">
             <td>{{karton.prodects3}}</td>
@@ -146,7 +147,31 @@
         </tr>
 
         {% endif %}
-       
+
+       {% if karton.prodect_5_new != None %}
+            <tr align="center">
+                <td>{{karton.prodect_5_new}}</td>
+                <td id="">{{karton.get_karton5_new|floatformat:2}}</td>
+                <td id="getnumber5">{{karton.get_Number_of_ceramics_excess5_new|floatformat:2}}</td>
+                <td id="balata5">{{karton.get_balata5_new|floatformat:2}}</td>
+                <td id="numbers5">{{karton.count_5_new|floatformat:2}}</td>
+                <td class="money5">{{karton.get_price_mets5_new|floatformat:2}}</td>
+                <td class="sums">{{karton.get_price5_new|floatformat:2}}</td>
+            </tr>
+            {% endif %}
+        
+        {% if karton.prodects_6_new  != None %}
+        <tr align="center">
+            <td>{{karton.prodects_6_new}}</td>
+            <td id="">{{karton.get_karton6_new|floatformat:2}}</td>
+            <td id="getnumber6">{{karton.get_Number_of_ceramics_excess6_new|floatformat:2}}</td>
+            <td id="balata6">{{karton.get_balata6_new|floatformat:2}}</td>
+            <td id="numbers6">{{karton.count_6_new}}</td>
+            <td class="">{{karton.get_price_mets6_new|floatformat:2}}</td>
+            <td class="sums">{{karton.get_price6_new|floatformat:2}}</td>
+        </tr>
+
+        {% endif %}
       
 
     </tbody>
