@@ -72,20 +72,13 @@ class orders5(models.Model):
     prodect_5 = models.ForeignKey(prodect,related_name='items5', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
     count_5 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, default=0)
     prodects_6 = models.ForeignKey(prodect,related_name='items6', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
-    count_6 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True)
+    count_6 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, blank=True)
 
-    prodects2 = models.ForeignKey(prodect,related_name='items22', on_delete=models.CASCADE, verbose_name=("المنتج"))
-    count2 = models.DecimalField(max_digits=7, decimal_places=2, verbose_name=("الامتار المطلوبة"))
-    prodects_22 = models.ForeignKey(prodect,related_name='items222', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
-    count_22 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, default=0)
-    prodects32 = models.ForeignKey(prodect,related_name='items32', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
-    count_32 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, default=0)
-    prodects_42 = models.ForeignKey(prodect,related_name='items42', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
-    count_42 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, default=0)
-    prodect_52 = models.ForeignKey(prodect,related_name='items52', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
-    count_52 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, default=0)
-    prodects_62 = models.ForeignKey(prodect,related_name='items62', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
-    count_62 = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True)
+    prodect_5_new = models.ForeignKey(prodect,related_name='items5_new', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
+    count_5_new = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True, default=0)
+    prodects_6_new = models.ForeignKey(prodect,related_name='items6_new', on_delete=models.CASCADE, verbose_name=("المنتج"), null=True, blank=True)
+    count_6_new = models.DecimalField(max_digits=7, decimal_places=2,verbose_name=("الامتار المطلوبة"), null=True)
+
     date_time = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, verbose_name=("وقت عملية الشراء"))
     date2= models.DateField(auto_now_add=True, verbose_name=("وقت العملية "), help_text='الامتار')
     # def get_brice(self):
@@ -115,6 +108,16 @@ class orders5(models.Model):
         if self.count_6:
             mag = self.count_6 / self.prodects_6.brice
             return mag  
+
+    def get_karton5_new(self):
+        if self.count_5_new :
+            mag = self.count_5_new  / self.prodect_5_new.brice
+            return mag  
+    def get_karton6_new(self):
+        if self.count_6_new:
+            mag = self.count_6_new / self.prodects_6_new.brice
+            return mag  
+
     def get_balata(self):
         fir = self.prodects.count_f * self.get_karton()
         return fir
@@ -138,6 +141,16 @@ class orders5(models.Model):
         if self.get_karton6() :
             fir = self.prodects_6.count_f * self.get_karton6()
             return fir
+
+    def get_balata5_new(self):
+        if self.get_karton5_new() :
+            fir = self.prodect_5_new.count_f * self.get_karton5_new()
+            return fir
+    def get_balata6(self):
+        if self.get_karton6_new() :
+            fir = self.prodects_6_new.count_f * self.get_karton6_new()
+            return fir
+
     def get_price(self):
         fer = self.prodects.buybrice * self.count
         return fer
@@ -154,9 +167,16 @@ class orders5(models.Model):
         fer = self.prodects.buybrice * self.count_5
         return fer
     def get_price6(self):
-        # if self.count_6 :
         fer = self.prodects.buybrice * self.count_6
         return fer
+
+    def get_price5_new(self):
+        fer = self.prodect_5_new.buybrice * self.count_5_new
+        return fer
+    def get_price6_new(self):
+        fer = self.prodects_6_new.buybrice * self.count_6_new
+        return fer
+
     def get_price_mets(self):
         if self.prodects.buybrice :
             return self.prodects.buybrice
@@ -176,90 +196,14 @@ class orders5(models.Model):
         if self.prodects_6 :
             return self.prodects_6.buybrice
 
-    def get_karton2(self):
-        mag = self.count2 / self.prodects2.brice 
-        return mag
-   
-    def get_karton22(self):
-        if self.count_22 :
-            mag22 = self.count_22 / self.prodects_22.brice
-            return mag2 2  
-    def get_karton32(self):
-        if self.count_32 :
-            mag2 = self.count_32 / self.prodects32.brice 
-            return mag2    
-    def get_karton42(self):
-        if self.count_42 :
-            mag = self.count_42 / self.prodects_42.brice
-            return mag  
-    def get_karton52(self):
-        if self.count_52 :
-            mag = self.count_52  / self.prodect_52.brice
-            return mag  
-    def get_karton62(self):
-        if self.count_62:
-            mag = self.count_62 / self.prodects_62.brice
-            return mag  
-    def get_balata2(self):
-        fir = self.prodects2.count_f * self.get_karton22()
-        return fir
-    def get_balata22(self):
-        if self.get_karton22() :
-            firss = self.prodects_22.count_f * self.get_karton22()
-            return firss
-    def get_balata3(self):
-        if self.get_karton32() :
-            fir = self.prodects32.count_f * self.get_karton32()
-            return fir
-    def get_balata42(self):
-        if self.get_karton42() :
-            fir = self.prodects_42.count_f * self.get_karton42()
-            return fir
-    def get_balata52(self):
-        if self.get_karton52() :
-            fir = self.prodect_52.count_f * self.get_karton52()
-            return fir
-    def get_balata62(self):
-        if self.get_karton62() :
-            fir = self.prodects_62.count_f * self.get_karton62()
-            return fir
-    def get_price2(self):
-        fer = self.prodects2.buybrice * self.count2
-        return fer
-    def get_price22(self):
-        fer = self.prodects22.buybrice * self.count_22
-        return fer
-    def get_price3(self):
-        fer = self.prodects.buybrice * self.count_3
-        return fer
-    def get_price4(self):
-        fer = self.prodects.buybrice * self.count_4
-        return fer
-    def get_price5(self):
-        fer = self.prodects.buybrice * self.count_5
-        return fer
-    def get_price6(self):
-        # if self.count_6 :
-        fer = self.prodects.buybrice * self.count_6
-        return fer
-    def get_price_mets(self):
-        if self.prodects.buybrice :
-            return self.prodects.buybrice
-    def get_price_mets2(self):
-        if self.prodects_2:
-            return self.prodects_2.buybrice
-    def get_price_mets3(self):
-        if self.prodects3 :
-            return self.prodects3.buybrice
-    def get_price_mets4(self):
-        if self.prodects_4 :
-            return self.prodects_4.buybrice
-    def get_price_mets5(self):
-        if self.prodect_5 :
-            return self.prodect_5.buybrice
-    def get_price_mets6(self):
-        if self.prodects_6 :
-            return self.prodects_6.buybrice
+    def get_price_mets5_new(self):
+        if self.prodect_5_new :
+            return self.prodect_5_new.buybrice
+    def get_price_mets6_new(self):
+        if self.prodects_6_new :
+            return self.prodects_6_new.buybrice
+
+        
     def save(self, *args, **kwargs):
         x = self.prodects.cwan - self.count
         self.prodects.cwan = x
@@ -284,6 +228,15 @@ class orders5(models.Model):
             t = self.prodects_6.cwan - self.count_6
             self.prodects_6.cwan = s
             self.prodects_6.save()
+
+        if self.count_5_new :
+            e = self.prodect_5_new.cwan - self.count_5_new
+            self.prodect_5_new.cwan = s
+            self.prodect_5_new.save()
+        if self.count_6_new :
+            t = self.prodects_6_new.cwan - self.count_6_new
+            self.prodects_6_new.cwan = s
+            self.prodects_6_new.save()
         super().save(*args, **kwargs)
     class Meta:
         ordering = ['-date_time']
